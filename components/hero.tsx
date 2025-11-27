@@ -13,7 +13,8 @@ const letterVariants = {
     transition: {
       delay: 0.3 + i * 0.05,
       duration: 0.5,
-      ease: [0.22, 1, 0.36, 1],
+      // FIXED: Added "as const" to satisfy TypeScript
+      ease: [0.22, 1, 0.36, 1] as const,
     },
   }),
 };
@@ -133,4 +134,3 @@ export function Hero() {
     </section>
   );
 }
-
