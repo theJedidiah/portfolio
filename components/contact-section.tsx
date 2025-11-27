@@ -62,10 +62,10 @@ export function ContactSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900 mb-4">
+          <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900 dark:text-white mb-4">
             Let&apos;s Work Together
           </h2>
-          <p className="text-slate-500">
+          <p className="text-slate-500 dark:text-slate-400">
             Have a project in mind? I&apos;d love to hear about it.
           </p>
         </motion.div>
@@ -81,7 +81,7 @@ export function ContactSection() {
           {/* Name & Email Row */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-2">
+              <label htmlFor="name" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 Name
               </label>
               <input
@@ -90,12 +90,12 @@ export function ContactSection() {
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl border border-zinc-200 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-300 transition-all"
+                className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/10 dark:focus:ring-white/10 focus:border-slate-300 dark:focus:border-slate-600 transition-all"
                 placeholder="Your name"
               />
             </div>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 Email
               </label>
               <input
@@ -104,7 +104,7 @@ export function ContactSection() {
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl border border-zinc-200 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-300 transition-all"
+                className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/10 dark:focus:ring-white/10 focus:border-slate-300 dark:focus:border-slate-600 transition-all"
                 placeholder="you@example.com"
               />
             </div>
@@ -112,7 +112,7 @@ export function ContactSection() {
 
           {/* Help Type Radio */}
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-3">
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">
               How can I help?
             </label>
             <div className="flex flex-wrap gap-3">
@@ -121,8 +121,8 @@ export function ContactSection() {
                   key={option.value}
                   className={`relative cursor-pointer px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
                     formData.helpType === option.value
-                      ? "bg-slate-900 text-white"
-                      : "bg-zinc-100 text-slate-600 hover:bg-zinc-200"
+                      ? "bg-slate-900 dark:bg-white text-white dark:text-slate-900"
+                      : "bg-zinc-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-zinc-200 dark:hover:bg-slate-700"
                   }`}
                 >
                   <input
@@ -143,7 +143,7 @@ export function ContactSection() {
 
           {/* Message */}
           <div>
-            <label htmlFor="message" className="block text-sm font-medium text-slate-700 mb-2">
+            <label htmlFor="message" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
               Message
             </label>
             <textarea
@@ -152,7 +152,7 @@ export function ContactSection() {
               rows={5}
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              className="w-full px-4 py-3 rounded-xl border border-zinc-200 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/10 focus:border-slate-300 transition-all resize-none"
+              className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/10 dark:focus:ring-white/10 focus:border-slate-300 dark:focus:border-slate-600 transition-all resize-none"
               placeholder="Tell me about your project..."
             />
           </div>
@@ -161,7 +161,7 @@ export function ContactSection() {
           <button
             type="submit"
             disabled={status === "loading" || status === "success"}
-            className="w-full py-4 px-6 bg-slate-900 text-white rounded-full font-medium text-sm hover:bg-slate-800 disabled:opacity-60 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2"
+            className="w-full py-4 px-6 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-full font-medium text-sm hover:bg-slate-800 dark:hover:bg-slate-100 disabled:opacity-60 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2"
           >
             {status === "loading" ? (
               <>
@@ -182,7 +182,7 @@ export function ContactSection() {
           </button>
 
           {status === "error" && (
-            <p className="text-center text-sm text-red-500">
+            <p className="text-center text-sm text-red-500 dark:text-red-400">
               Something went wrong. Please try again.
             </p>
           )}

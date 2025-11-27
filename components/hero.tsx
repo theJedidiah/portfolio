@@ -1,118 +1,135 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, Sparkles } from "lucide-react";
+import { ArrowDown } from "lucide-react";
+import Image from "next/image";
+import { useTheme } from "./theme-provider";
+
+const letterVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: 0.3 + i * 0.05,
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+};
 
 export function Hero() {
+  const { theme } = useTheme();
+  const name = "jedidiah.";
+
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center px-6 overflow-hidden">
-      {/* Subtle background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-zinc-50 via-white to-white" />
-      
-      {/* Decorative grid */}
-      <div 
-        className="absolute inset-0 opacity-[0.015]"
-        style={{
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px),
-                           linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px)`,
-          backgroundSize: '60px 60px'
-        }}
-      />
+    <section className="relative min-h-screen bg-stone-100 dark:bg-slate-950 overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
+          {/* Left Content */}
+          <div className="flex flex-col justify-center px-6 sm:px-12 lg:px-16 py-32 lg:py-0 lg:ml-[48px]">
+            {/* Role Tag */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-lg sm:text-xl text-teal-600 dark:text-teal-400 font-medium mb-4"
+            >
+              Product Manager & Developer
+            </motion.p>
 
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
-        {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-100 border border-zinc-200 text-sm text-slate-600 mb-8"
-        >
-          <Sparkles size={14} className="text-amber-500" />
-          <span>Product Manager & Developer</span>
-        </motion.div>
+            {/* Name */}
+            <motion.h1
+              key={theme}
+              initial="hidden"
+              animate="visible"
+              className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-serif font-normal text-slate-900 dark:text-white tracking-tight leading-[1.05] mb-8 overflow-hidden"
+            >
+              {name.split("").map((letter, i) => (
+                <motion.span
+                  key={`${letter}-${i}`}
+                  custom={i}
+                  variants={letterVariants}
+                  className="inline-block"
+                  style={{ display: letter === " " ? "inline" : "inline-block" }}
+                >
+                  {letter}
+                </motion.span>
+              ))}
+            </motion.h1>
 
-        {/* Main Heading */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-slate-900 tracking-tight leading-[1.1] mb-6"
-        >
-          I bridge the gap between{" "}
-          <span className="relative inline-block">
-            <span className="relative z-10 bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 bg-clip-text text-transparent">
-              Product Strategy
-            </span>
-            <motion.span
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="absolute bottom-2 left-0 right-0 h-3 bg-amber-200/60 -z-10 origin-left"
+            {/* Description */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="border-l-2 border-slate-300 dark:border-slate-600 pl-6 max-w-md"
+            >
+              <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+                jedidiah. is an accomplished product manager and developer with a knack for creating smarter and enriching digital experiences for people and businesses.
+              </p>
+            </motion.div>
+
+            {/* CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+              className="mt-10"
+            >
+              <a
+                href="#work"
+                className="group inline-flex items-center gap-3 text-slate-900 dark:text-white font-medium hover:text-teal-600 dark:hover:text-teal-400 transition-colors"
+              >
+                <span className="text-sm uppercase tracking-wider">View My Work</span>
+                <ArrowDown size={18} className="group-hover:translate-y-1 transition-transform" />
+              </a>
+            </motion.div>
+          </div>
+
+          {/* Right Image */}
+          <div className="relative hidden lg:block">
+            {/* Decorative shapes */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="absolute bottom-0 left-0 w-48 h-48 bg-teal-600 dark:bg-teal-500 rounded-tr-[80px] z-10"
             />
-          </span>{" "}
-          and{" "}
-          <span className="relative inline-block">
-            <span className="relative z-10 bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 bg-clip-text text-transparent">
-              Engineering
-            </span>
-            <motion.span
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 0.8, delay: 1 }}
-              className="absolute bottom-2 left-0 right-0 h-3 bg-blue-200/60 -z-10 origin-left"
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="absolute top-1/3 right-0 w-24 h-32 bg-amber-400 dark:bg-amber-500 z-10"
             />
-          </span>
-        </motion.h1>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="absolute bottom-1/4 left-1/4 w-16 h-16 bg-slate-800 dark:bg-slate-700 rounded-full z-0"
+            />
 
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="text-lg sm:text-xl text-slate-500 max-w-2xl mx-auto mb-12 leading-relaxed"
-        >
-          I craft digital products from concept to code. Whether defining roadmaps
-          or shipping features, I bring a unique perspective that unites both worlds.
-        </motion.p>
-
-        {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          <a
-            href="#work"
-            className="group px-8 py-4 bg-slate-900 text-white rounded-full font-medium text-sm hover:bg-slate-800 transition-colors duration-200 flex items-center gap-2"
-          >
-            View My Work
-            <ArrowDown size={16} className="group-hover:translate-y-0.5 transition-transform" />
-          </a>
-          <a
-            href="#contact"
-            className="px-8 py-4 bg-white text-slate-900 rounded-full font-medium text-sm border border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 transition-all duration-200"
-          >
-            Get in Touch
-          </a>
-        </motion.div>
+            {/* Main Image */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="relative h-full w-full"
+            >
+              <Image
+                src="/hero-image.jpg"
+                alt="jedidiah."
+                fill
+                className="object-cover object-center"
+                priority
+              />
+            </motion.div>
+          </div>
+        </div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          className="w-6 h-10 rounded-full border-2 border-zinc-300 flex items-start justify-center p-2"
-        >
-          <motion.div className="w-1.5 h-1.5 rounded-full bg-zinc-400" />
-        </motion.div>
-      </motion.div>
+      {/* Mobile decorative element */}
+      <div className="lg:hidden absolute bottom-0 right-0 w-32 h-32 bg-teal-600 dark:bg-teal-500 rounded-tl-[60px]" />
     </section>
   );
 }

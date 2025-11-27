@@ -17,21 +17,21 @@ const filters: { value: FilterCategory; label: string; icon: React.ReactNode }[]
 
 export function ProjectFilter({ activeFilter, onFilterChange }: ProjectFilterProps) {
   return (
-    <div className="flex items-center justify-center gap-2 p-1.5 bg-zinc-100/80 rounded-full border border-zinc-200/60">
+    <div className="flex items-center justify-center gap-2 p-1.5 bg-zinc-100/80 dark:bg-slate-800/80 rounded-full border border-zinc-200/60 dark:border-slate-700/60">
       {filters.map((filter) => (
         <button
           key={filter.value}
           onClick={() => onFilterChange(filter.value)}
           className={`relative px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 flex items-center gap-2 ${
             activeFilter === filter.value
-              ? "text-slate-900"
-              : "text-slate-500 hover:text-slate-700"
+              ? "text-slate-900 dark:text-white"
+              : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
           }`}
         >
           {activeFilter === filter.value && (
             <motion.div
               layoutId="activeFilter"
-              className="absolute inset-0 bg-white rounded-full shadow-sm border border-zinc-200/60"
+              className="absolute inset-0 bg-white dark:bg-slate-700 rounded-full shadow-sm border border-zinc-200/60 dark:border-slate-600/60"
               transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
             />
           )}

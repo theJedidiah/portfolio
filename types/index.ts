@@ -29,6 +29,7 @@ export interface BlogPost {
   publishedAt: string;
   coverImage?: string;
   tags: string[];
+  content?: string;
 }
 
 // Filter Types

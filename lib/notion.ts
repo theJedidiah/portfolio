@@ -1,97 +1,90 @@
-import { NotionAPI } from "notion-client";
-import { BlogPost } from "@/types";
+import { Client } from "@notionhq/client";
+import { NotionToMarkdown } from "notion-to-md";
 
-const notion = new NotionAPI();
+// 1. Initialize the Client (We keep this for notion-to-md)
+const notion = new Client({
+  auth: process.env.NOTION_TOKEN,
+});
 
-// Replace with your Notion database/page ID
-const NOTION_BLOG_PAGE_ID = process.env.NOTION_BLOG_PAGE_ID || "";
+const n2m = new NotionToMarkdown({ notionClient: notion });
 
-export async function getNotionPage(pageId: string) {
-  try {
-    const recordMap = await notion.getPage(pageId);
-    return recordMap;
-  } catch (error) {
-    console.error("Error fetching Notion page:", error);
-    return null;
-  }
+export interface BlogPost {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  publishedAt: string;
+  tags: string[];
+  content?: string;
 }
 
+// 2. NEW: Fetch Blog Posts using standard "fetch" (Bypassing the broken library)
 export async function getBlogPosts(): Promise<BlogPost[]> {
-  // For now, return mock data until Notion is configured
-  // In production, this would fetch from Notion API
-  if (!NOTION_BLOG_PAGE_ID) {
-    return getMockBlogPosts();
+  const databaseId = process.env.NOTION_DATABASE_ID;
+  const token = process.env.NOTION_TOKEN;
+
+  if (!databaseId || !token) {
+    console.warn("Missing Notion Secrets");
+    return [];
   }
 
   try {
-    const recordMap = await notion.getPage(NOTION_BLOG_PAGE_ID);
-    // Parse the recordMap to extract blog posts
-    // This depends on your Notion database structure
-    return parseBlogPostsFromNotion(recordMap);
+    // We call the Notion API directly via URL
+    const response = await fetch(`https://api.notion.com/v1/databases/${databaseId}/query`, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Notion-Version": "2022-06-28", // Use the latest stable API version
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        filter: {
+          property: "Published",
+          checkbox: { equals: true },
+        },
+        sorts: [{ property: "Date", direction: "descending" }],
+      }),
+      next: { revalidate: 60 }, // Cache for 60 seconds
+    });
+
+    if (!response.ok) {
+      console.error("Notion API Error:", response.status, response.statusText);
+      return [];
+    }
+
+    const data = await response.json();
+
+    // Map the raw data manually
+    return data.results.map((post: any) => ({
+      id: post.id,
+      slug: post.properties.Slug?.rich_text[0]?.plain_text || "",
+      title: post.properties.Name?.title[0]?.plain_text || "Untitled",
+      description: post.properties.Summary?.rich_text[0]?.plain_text || "",
+      publishedAt: post.properties.Date?.date?.start || new Date().toISOString(),
+      tags: post.properties.Tags?.multi_select.map((tag: any) => tag.name) || [],
+    }));
+
   } catch (error) {
-    console.error("Error fetching blog posts:", error);
-    return getMockBlogPosts();
+    console.error("Failed to fetch posts:", error);
+    return [];
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function parseBlogPostsFromNotion(recordMap: any): BlogPost[] {
-  // Implementation depends on your Notion structure
-  // This is a placeholder that should be customized
-  const blocks = recordMap?.block || {};
-  const posts: BlogPost[] = [];
-
-  Object.values(blocks).forEach((block: unknown) => {
-    const typedBlock = block as { value?: { type?: string; properties?: { title?: string[][] } } };
-    if (typedBlock?.value?.type === "page") {
-      posts.push({
-        id: String(Math.random()),
-        slug: typedBlock.value.properties?.title?.[0]?.[0]?.toLowerCase().replace(/\s+/g, "-") || "",
-        title: typedBlock.value.properties?.title?.[0]?.[0] || "Untitled",
-        description: "",
-        publishedAt: new Date().toISOString(),
-        tags: [],
-      });
-    }
-  });
-
-  return posts;
-}
-
-function getMockBlogPosts(): BlogPost[] {
-  return [
-    {
-      id: "1",
-      slug: "bridging-product-engineering",
-      title: "Bridging the Gap Between Product and Engineering",
-      description: "How understanding both sides leads to better products and happier teams.",
-      publishedAt: "2024-11-20",
-      coverImage: "/blog/bridge.jpg",
-      tags: ["Product Management", "Engineering", "Leadership"],
-    },
-    {
-      id: "2",
-      slug: "nextjs-15-deep-dive",
-      title: "Next.js 15: A Deep Dive into Server Components",
-      description: "Exploring the new features and patterns in Next.js 15's App Router.",
-      publishedAt: "2024-11-15",
-      coverImage: "/blog/nextjs.jpg",
-      tags: ["Next.js", "React", "Web Development"],
-    },
-    {
-      id: "3",
-      slug: "roadmap-prioritization",
-      title: "The Art of Roadmap Prioritization",
-      description: "A framework for making tough decisions when everything seems important.",
-      publishedAt: "2024-11-10",
-      coverImage: "/blog/roadmap.jpg",
-      tags: ["Product Management", "Strategy", "Frameworks"],
-    },
-  ];
-}
-
+// 3. Fetch Single Post (Keeps using the library for Markdown conversion)
 export async function getBlogPost(slug: string): Promise<BlogPost | null> {
+  // We reuse the fetch method here too to be safe
   const posts = await getBlogPosts();
-  return posts.find((post) => post.slug === slug) || null;
-}
+  const post = posts.find((p) => p.slug === slug);
 
+  if (!post) return null;
+
+  // We only use the library for the content conversion part
+  try {
+    const mdblocks = await n2m.pageToMarkdown(post.id);
+    const mdString = n2m.toMarkdownString(mdblocks);
+    return { ...post, content: mdString.parent };
+  } catch (e) {
+    console.error("Error parsing markdown:", e);
+    return { ...post, content: "Error loading content." };
+  }
+}

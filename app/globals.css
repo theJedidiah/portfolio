@@ -45,6 +45,24 @@
   --ring: #94a3b8;
 }
 
+.dark {
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --card: #1e293b;
+  --card-foreground: #f8fafc;
+  --primary: #f8fafc;
+  --primary-foreground: #0f172a;
+  --secondary: #1e293b;
+  --secondary-foreground: #f8fafc;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --accent: #1e293b;
+  --accent-foreground: #f8fafc;
+  --border: #334155;
+  --input: #334155;
+  --ring: #475569;
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -63,17 +81,34 @@
   background: #f4f4f5;
 }
 
+.dark ::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
 ::-webkit-scrollbar-thumb {
   background: #d4d4d8;
   border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #a1a1aa;
 }
 
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
 /* Selection */
 ::selection {
   background-color: #0f172a;
   color: #ffffff;
+}
+
+.dark ::selection {
+  background-color: #f8fafc;
+  color: #0f172a;
 }

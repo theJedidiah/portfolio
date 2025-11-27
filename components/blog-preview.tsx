@@ -9,7 +9,7 @@ interface BlogPreviewProps {
 
 export function BlogPreview({ posts }: BlogPreviewProps) {
   return (
-    <section className="py-24 px-6 bg-zinc-50/50">
+    <section className="py-24 px-6 bg-zinc-50/50 dark:bg-slate-900/50">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <motion.div
@@ -20,16 +20,16 @@ export function BlogPreview({ posts }: BlogPreviewProps) {
           className="flex items-end justify-between mb-12"
         >
           <div>
-            <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900 mb-2">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900 dark:text-white mb-2">
               Recent Writing
             </h2>
-            <p className="text-slate-500">
+            <p className="text-slate-500 dark:text-slate-400">
               Thoughts on product, engineering, and everything in between.
             </p>
           </div>
           <Link
             href="/blog"
-            className="hidden sm:flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
+            className="hidden sm:flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
           >
             View all posts
             <ArrowRight size={16} />
@@ -47,9 +47,9 @@ export function BlogPreview({ posts }: BlogPreviewProps) {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <Link href={`/blog/${post.slug}`} className="group block">
-                <div className="h-full rounded-2xl border border-zinc-200 bg-white p-6 transition-all duration-300 hover:shadow-md hover:border-zinc-300 hover:-translate-y-1">
+                <div className="h-full rounded-2xl border border-zinc-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-6 transition-all duration-300 hover:shadow-md hover:border-zinc-300 dark:hover:border-slate-600 hover:-translate-y-1">
                   {/* Date */}
-                  <div className="flex items-center gap-2 text-xs text-slate-400 mb-4">
+                  <div className="flex items-center gap-2 text-xs text-slate-400 dark:text-slate-500 mb-4">
                     <Calendar size={12} />
                     {new Date(post.publishedAt).toLocaleDateString("en-US", {
                       month: "short",
@@ -59,12 +59,12 @@ export function BlogPreview({ posts }: BlogPreviewProps) {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-lg font-semibold text-slate-900 mb-2 group-hover:text-slate-700 transition-colors line-clamp-2">
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2 group-hover:text-slate-700 dark:group-hover:text-slate-200 transition-colors line-clamp-2">
                     {post.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-sm text-slate-500 line-clamp-2 mb-4">
+                  <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 mb-4">
                     {post.description}
                   </p>
 
@@ -73,7 +73,7 @@ export function BlogPreview({ posts }: BlogPreviewProps) {
                     {post.tags.slice(0, 2).map((tag) => (
                       <span
                         key={tag}
-                        className="px-2 py-1 text-xs text-slate-500 bg-zinc-100 rounded-md"
+                        className="px-2 py-1 text-xs text-slate-500 dark:text-slate-400 bg-zinc-100 dark:bg-slate-800 rounded-md"
                       >
                         {tag}
                       </span>
@@ -94,7 +94,7 @@ export function BlogPreview({ posts }: BlogPreviewProps) {
         >
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
           >
             View all posts
             <ArrowRight size={16} />

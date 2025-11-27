@@ -1,78 +1,83 @@
 import Link from "next/link";
-import { Calendar, ArrowRight } from "lucide-react";
 import { getBlogPosts } from "@/lib/notion";
 
-export const metadata = {
-  title: "Blog | Portfolio",
-  description: "Thoughts on product, engineering, and everything in between.",
-};
+export const revalidate = 60; // Revalidate data every 60 seconds
 
 export default async function BlogPage() {
   const posts = await getBlogPosts();
 
+  // Sort posts by date just in case Notion didn't
+  const sortedPosts = posts.sort((a, b) => {
+    return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+  });
+
   return (
-    <div className="pt-32 pb-24 px-6">
-      <div className="max-w-4xl mx-auto">
+    <main className="min-h-screen pt-32 pb-16 px-6">
+      <div className="max-w-3xl mx-auto space-y-12">
+        
         {/* Header */}
-        <header className="mb-12">
-          <h1 className="text-4xl sm:text-5xl font-semibold text-slate-900 mb-4">
+        <div className="space-y-4">
+          <h1 className="text-4xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
             Blog
           </h1>
-          <p className="text-xl text-slate-500">
-            Thoughts on product, engineering, and everything in between.
+          <p className="text-zinc-600 dark:text-zinc-400 text-lg">
+            Thoughts on software, design, and product engineering.
           </p>
-        </header>
-
-        {/* Posts Grid */}
-        <div className="space-y-6">
-          {posts.map((post) => (
-            <article key={post.id}>
-              <Link href={`/blog/${post.slug}`} className="group block">
-                <div className="p-6 rounded-2xl border border-zinc-200 bg-white hover:shadow-md hover:border-zinc-300 hover:-translate-y-0.5 transition-all duration-300">
-                  <div className="flex items-center gap-2 text-sm text-slate-400 mb-3">
-                    <Calendar size={14} />
-                    {new Date(post.publishedAt).toLocaleDateString("en-US", {
-                      month: "long",
-                      day: "numeric",
-                      year: "numeric",
-                    })}
-                  </div>
-
-                  <h2 className="text-xl font-semibold text-slate-900 mb-2 group-hover:text-slate-700 transition-colors">
-                    {post.title}
-                  </h2>
-
-                  <p className="text-slate-500 mb-4">{post.description}</p>
-
-                  <div className="flex items-center justify-between">
-                    <div className="flex flex-wrap gap-2">
-                      {post.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2.5 py-1 text-xs text-slate-500 bg-zinc-100 rounded-md"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <span className="text-sm text-slate-400 group-hover:text-slate-600 flex items-center gap-1 transition-colors">
-                      Read more
-                      <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            </article>
-          ))}
         </div>
 
-        {posts.length === 0 && (
-          <div className="text-center py-16">
-            <p className="text-slate-400">No posts yet. Check back soon!</p>
-          </div>
-        )}
+        {/* Post List */}
+        <div className="grid gap-8">
+          {sortedPosts.length === 0 ? (
+            <p className="text-zinc-500 italic">No posts found. Check back soon!</p>
+          ) : (
+            sortedPosts.map((post) => (
+              <article key={post.id} className="group relative flex flex-col items-start">
+                <h2 className="text-xl font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+                  <div className="absolute -inset-x-4 -inset-y-6 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-800/50 sm:-inset-x-6 sm:rounded-2xl" />
+                  <Link href={`/blog/${post.slug}`}>
+                    <span className="absolute -inset-x-4 -inset-y-6 z-20 sm:-inset-x-6 sm:rounded-2xl" />
+                    <span className="relative z-10">{post.title}</span>
+                  </Link>
+                </h2>
+                
+                {/* Date & Tags */}
+                <div className="relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500 pl-3.5">
+                  <span className="absolute inset-y-0 left-0 flex items-center" aria-hidden="true">
+                    <span className="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500" />
+                  </span>
+                  <time dateTime={post.publishedAt}>
+                    {new Date(post.publishedAt).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </time>
+                  {post.tags && post.tags.length > 0 && (
+                     <>
+                       <span className="mx-2">–</span>
+                       <span className="text-zinc-500 dark:text-zinc-400 font-medium">
+                         {post.tags.join(", ")}
+                       </span>
+                     </>
+                  )}
+                </div>
+
+                {/* Summary */}
+                <p className="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                  {post.description}
+                </p>
+                
+                <div aria-hidden="true" className="relative z-10 mt-4 flex items-center text-sm font-medium text-teal-500">
+                  Read article
+                  <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" className="ml-1 h-4 w-4 stroke-current">
+                    <path d="M6.75 5.75 9.25 8l-2.5 2.25" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+              </article>
+            ))
+          )}
+        </div>
       </div>
-    </div>
+    </main>
   );
 }
-
