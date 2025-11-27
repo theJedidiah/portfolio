@@ -61,10 +61,10 @@ export function NavBar() {
         className="fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 hidden md:block"
       >
         <nav
-          className={`rounded-full border border-zinc-200/60 dark:border-zinc-700/60 px-6 py-3 transition-all duration-300 ${
+          className={`rounded-full border border-coffee-200/60 dark:border-coffee-700/60 px-6 py-3 transition-all duration-300 ${
             isScrolled
-              ? "bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-lg shadow-zinc-900/5 dark:shadow-black/20"
-              : "bg-white/60 dark:bg-slate-900/60 backdrop-blur-md"
+              ? "bg-white/80 dark:bg-coffee-950/80 backdrop-blur-xl shadow-lg shadow-coffee-900/5 dark:shadow-black/20"
+              : "bg-white/60 dark:bg-coffee-950/60 backdrop-blur-md"
           }`}
         >
           <div className="flex items-center justify-center">
@@ -76,8 +76,8 @@ export function NavBar() {
                     href={item.href}
                     className={`text-sm px-4 py-1.5 rounded-full transition-all duration-200 ${
                       isActive(item.href)
-                        ? "bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-medium"
-                        : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800"
+                        ? "bg-[#6F4E37] text-white font-medium dark:ring-2 dark:ring-white"
+                        : "text-[#5c4130] dark:text-[#d4b8a5] hover:text-[#412e24] dark:hover:text-white hover:bg-[#f3ebe4] dark:hover:bg-[#3d2e24]"
                     }`}
                   >
                     {item.label}
@@ -88,7 +88,7 @@ export function NavBar() {
               <li>
                 <button
                   onClick={toggleTheme}
-                  className="ml-2 p-2 rounded-full text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                  className="ml-2 p-2 rounded-full text-coffee-600 dark:text-coffee-300 hover:text-coffee-900 dark:hover:text-white hover:bg-coffee-100 dark:hover:bg-coffee-800 transition-colors"
                   aria-label="Toggle theme"
                 >
                   {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
@@ -108,14 +108,14 @@ export function NavBar() {
       >
         <button
           onClick={toggleTheme}
-          className="p-2.5 rounded-full bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-700/60 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
+          className="p-2.5 rounded-full bg-white/60 dark:bg-coffee-950/60 backdrop-blur-md border border-coffee-200/60 dark:border-coffee-700/60 text-coffee-600 dark:text-coffee-300 hover:text-coffee-900 dark:hover:text-white transition-colors"
           aria-label="Toggle theme"
         >
           {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
         </button>
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="p-2.5 rounded-full bg-white/60 dark:bg-slate-900/60 backdrop-blur-md border border-zinc-200/60 dark:border-zinc-700/60 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
+          className="p-2.5 rounded-full bg-white/60 dark:bg-coffee-950/60 backdrop-blur-md border border-coffee-200/60 dark:border-coffee-700/60 text-coffee-600 dark:text-coffee-300 hover:text-coffee-900 dark:hover:text-white transition-colors"
           aria-label="Toggle menu"
         >
           {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -137,7 +137,7 @@ export function NavBar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="fixed top-20 left-4 right-4 z-50 md:hidden bg-white dark:bg-slate-900 rounded-2xl shadow-xl border border-zinc-200/60 dark:border-zinc-700/60 p-4"
+            className="fixed top-20 left-4 right-4 z-50 md:hidden bg-white dark:bg-coffee-950 rounded-2xl shadow-xl border border-coffee-200/60 dark:border-coffee-700/60 p-4"
           >
             <ul className="flex flex-col gap-1">
               {navItems.map((item, index) => (
@@ -152,8 +152,8 @@ export function NavBar() {
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={`flex items-center text-base px-4 py-3 rounded-xl transition-all ${
                       isActive(item.href)
-                        ? "bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-medium"
-                        : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-800"
+                        ? "bg-[#6F4E37] text-white font-medium dark:ring-2 dark:ring-white"
+                        : "text-[#5c4130] dark:text-[#d4b8a5] hover:text-[#412e24] dark:hover:text-white hover:bg-[#faf6f3] dark:hover:bg-[#3d2e24]"
                     }`}
                   >
                     {item.label}

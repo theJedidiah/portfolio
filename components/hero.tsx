@@ -24,7 +24,7 @@ export function Hero() {
   const name = "jedidiah.";
 
   return (
-    <section className="relative min-h-screen bg-stone-100 dark:bg-slate-950 overflow-hidden">
+    <section className="relative min-h-screen bg-coffee-50 dark:bg-coffee-950 overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
           {/* Left Content */}
@@ -34,7 +34,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-lg sm:text-xl text-teal-600 dark:text-teal-400 font-medium mb-4"
+              className="text-lg sm:text-xl text-coffee-600 dark:text-coffee-400 font-medium mb-4"
             >
               Product Manager & Developer
             </motion.p>
@@ -44,7 +44,7 @@ export function Hero() {
               key={theme}
               initial="hidden"
               animate="visible"
-              className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-serif font-normal text-slate-900 dark:text-white tracking-tight leading-[1.05] mb-8 overflow-hidden"
+              className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-serif font-normal text-coffee-900 dark:text-coffee-100 tracking-tight leading-[1.05] mb-8 overflow-hidden"
             >
               {name.split("").map((letter, i) => (
                 <motion.span
@@ -64,9 +64,9 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="border-l-2 border-slate-300 dark:border-slate-600 pl-6 max-w-md"
+              className="border-l-2 border-coffee-300 dark:border-coffee-700 pl-6 max-w-md"
             >
-              <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+              <p className="text-base sm:text-lg text-coffee-700 dark:text-coffee-300 leading-relaxed">
                 jedidiah. is an accomplished product manager and developer with a knack for creating smarter and enriching digital experiences for people and businesses.
               </p>
             </motion.div>
@@ -80,7 +80,7 @@ export function Hero() {
             >
               <a
                 href="#work"
-                className="group inline-flex items-center gap-3 text-slate-900 dark:text-white font-medium hover:text-teal-600 dark:hover:text-teal-400 transition-colors"
+                className="group inline-flex items-center gap-3 text-coffee-900 dark:text-coffee-100 font-medium hover:text-coffee-600 dark:hover:text-coffee-400 transition-colors"
               >
                 <span className="text-sm uppercase tracking-wider">View My Work</span>
                 <ArrowDown size={18} className="group-hover:translate-y-1 transition-transform" />
@@ -95,19 +95,19 @@ export function Hero() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="absolute bottom-0 left-0 w-48 h-48 bg-teal-600 dark:bg-teal-500 rounded-tr-[80px] z-10"
+              className="absolute bottom-0 left-0 w-48 h-48 bg-coffee-600 dark:bg-coffee-500 dark:ring-2 dark:ring-white/20 rounded-tr-[80px] z-10"
             />
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="absolute top-1/3 right-0 w-24 h-32 bg-amber-400 dark:bg-amber-500 z-10"
+              className="absolute top-1/3 right-0 w-24 h-32 bg-coffee-400 dark:bg-coffee-300 z-10"
             />
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="absolute bottom-1/4 left-1/4 w-16 h-16 bg-slate-800 dark:bg-slate-700 rounded-full z-0"
+              className="absolute bottom-1/4 left-1/4 w-16 h-16 bg-coffee-800 dark:bg-coffee-700 rounded-full z-0"
             />
 
             {/* Main Image */}
@@ -130,7 +130,7 @@ export function Hero() {
       </div>
 
       {/* Mobile decorative element */}
-      <div className="lg:hidden absolute bottom-0 right-0 w-32 h-32 bg-teal-600 dark:bg-teal-500 rounded-tl-[60px]" />
+      <div className="lg:hidden absolute bottom-0 right-0 w-32 h-32 bg-coffee-600 dark:bg-coffee-500 dark:ring-2 dark:ring-white/20 rounded-tl-[60px]" />
     </section>
   );
 }

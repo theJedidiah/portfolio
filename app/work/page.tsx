@@ -8,7 +8,7 @@ export const metadata = {
 export default function WorkPage() {
   return (
     <div className="pt-24">
-      <WorkSection />
+      <WorkSection showAll />
     </div>
   );
 }

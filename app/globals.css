@@ -28,39 +28,39 @@
 
 :root {
   --radius: 0.625rem;
-  --background: #ffffff;
-  --foreground: #0f172a;
+  --background: #faf6f3;
+  --foreground: #231812;
   --card: #ffffff;
-  --card-foreground: #0f172a;
-  --primary: #0f172a;
-  --primary-foreground: #fafafa;
-  --secondary: #f4f4f5;
-  --secondary-foreground: #0f172a;
-  --muted: #f4f4f5;
-  --muted-foreground: #64748b;
-  --accent: #f4f4f5;
-  --accent-foreground: #0f172a;
-  --border: #e4e4e7;
-  --input: #e4e4e7;
-  --ring: #94a3b8;
+  --card-foreground: #231812;
+  --primary: #6F4E37;
+  --primary-foreground: #ffffff;
+  --secondary: #f3ebe4;
+  --secondary-foreground: #231812;
+  --muted: #f3ebe4;
+  --muted-foreground: #5c4130;
+  --accent: #e6d5c8;
+  --accent-foreground: #231812;
+  --border: #e6d5c8;
+  --input: #e6d5c8;
+  --ring: #a87b5f;
 }
 
 .dark {
-  --background: #0f172a;
-  --foreground: #f8fafc;
-  --card: #1e293b;
-  --card-foreground: #f8fafc;
-  --primary: #f8fafc;
-  --primary-foreground: #0f172a;
-  --secondary: #1e293b;
-  --secondary-foreground: #f8fafc;
-  --muted: #1e293b;
-  --muted-foreground: #94a3b8;
-  --accent: #1e293b;
-  --accent-foreground: #f8fafc;
-  --border: #334155;
-  --input: #334155;
-  --ring: #475569;
+  --background: #1a1412;
+  --foreground: #f3ebe4;
+  --card: #231812;
+  --card-foreground: #f3ebe4;
+  --primary: #c19780;
+  --primary-foreground: #231812;
+  --secondary: #2d221c;
+  --secondary-foreground: #f3ebe4;
+  --muted: #2d221c;
+  --muted-foreground: #a87b5f;
+  --accent: #3d2e24;
+  --accent-foreground: #f3ebe4;
+  --border: #3d2e24;
+  --input: #3d2e24;
+  --ring: #6F4E37;
 }
 
 @layer base {
@@ -78,37 +78,37 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #f4f4f5;
+  background: #f3ebe4;
 }
 
 .dark ::-webkit-scrollbar-track {
-  background: #1e293b;
+  background: #231812;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d4d4d8;
+  background: #d4b8a5;
   border-radius: 4px;
 }
 
 .dark ::-webkit-scrollbar-thumb {
-  background: #475569;
+  background: #5c4130;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a1a1aa;
+  background: #a87b5f;
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: #64748b;
+  background: #6F4E37;
 }
 
 /* Selection */
 ::selection {
-  background-color: #0f172a;
+  background-color: #6F4E37;
   color: #ffffff;
 }
 
 .dark ::selection {
-  background-color: #f8fafc;
-  color: #0f172a;
+  background-color: #c19780;
+  color: #231812;
 }

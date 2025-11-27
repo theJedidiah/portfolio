@@ -121,7 +121,7 @@ export function ContactSection() {
                   key={option.value}
                   className={`relative cursor-pointer px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
                     formData.helpType === option.value
-                      ? "bg-slate-900 dark:bg-white text-white dark:text-slate-900"
+                      ? "bg-[#6F4E37] text-white dark:ring-2 dark:ring-white"
                       : "bg-zinc-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-zinc-200 dark:hover:bg-slate-700"
                   }`}
                 >
@@ -161,7 +161,7 @@ export function ContactSection() {
           <button
             type="submit"
             disabled={status === "loading" || status === "success"}
-            className="w-full py-4 px-6 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-full font-medium text-sm hover:bg-slate-800 dark:hover:bg-slate-100 disabled:opacity-60 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2"
+            className="w-full py-4 px-6 bg-[#6F4E37] text-white rounded-full font-medium text-sm hover:bg-[#5c4130] dark:ring-2 dark:ring-white disabled:opacity-60 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2"
           >
             {status === "loading" ? (
               <>

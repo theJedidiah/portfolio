@@ -104,7 +104,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               
               // Links
               a: ({ node, ...props }) => (
-                <a {...props} className="text-teal-600 dark:text-teal-400 hover:underline font-medium" target="_blank" rel="noopener noreferrer" />
+                <a {...props} className="text-coffee-600 dark:text-coffee-400 hover:underline font-medium" target="_blank" rel="noopener noreferrer" />
               ),
               
               // Inline Code

@@ -9,7 +9,11 @@ import { BentoCard } from "./bento-card";
 import { projects } from "@/data/projects";
 import { FilterCategory } from "@/types";
 
-export function WorkSection() {
+interface WorkSectionProps {
+  showAll?: boolean;
+}
+
+export function WorkSection({ showAll = false }: WorkSectionProps) {
   const [activeFilter, setActiveFilter] = useState<FilterCategory>("all");
 
   const filteredProjects = useMemo(() => {
@@ -19,8 +23,8 @@ export function WorkSection() {
     );
   }, [activeFilter]);
 
-  // Only show the first 4 projects for the home page preview
-  const visibleProjects = filteredProjects.slice(0, 4);
+  // Show all projects on /work page, truncate to 4 on home page
+  const visibleProjects = showAll ? filteredProjects : filteredProjects.slice(0, 4);
 
   return (
     <section id="work" className="py-24 px-6">
@@ -81,25 +85,27 @@ export function WorkSection() {
           </motion.div>
         )}
 
-        {/* View All Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-16 flex justify-center"
-        >
-          <Link
-            href="/work"
-            className="group flex items-center gap-2 px-6 py-3 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 font-medium transition-all hover:bg-slate-800 dark:hover:bg-zinc-200"
+        {/* View All Button - Only show on home page */}
+        {!showAll && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-16 flex justify-center"
           >
-            View All Projects
-            <ArrowRight
-              size={16}
-              className="transition-transform group-hover:translate-x-1"
-            />
-          </Link>
-        </motion.div>
+            <Link
+              href="/work"
+              className="group flex items-center gap-2 px-6 py-3 rounded-full bg-[#6F4E37] text-white font-medium transition-all hover:bg-[#5c4130] dark:ring-2 dark:ring-white"
+            >
+              View All Projects
+              <ArrowRight
+                size={16}
+                className="transition-transform group-hover:translate-x-1"
+              />
+            </Link>
+          </motion.div>
+        )}
       </div>
     </section>
   );
