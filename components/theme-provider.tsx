@@ -16,6 +16,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     const saved = localStorage.getItem("theme") as Theme | null;
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -46,7 +47,7 @@ export function useTheme() {
   const context = useContext(ThemeContext);
   if (!context) {
     // Return default values when used outside provider (during SSR/initial render)
-    return { theme: "light" as Theme, toggleTheme: () => {} };
+    return { theme: "light" as Theme, toggleTheme: () => { } };
   }
   return context;
 }

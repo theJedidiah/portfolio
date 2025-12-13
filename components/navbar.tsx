@@ -61,34 +61,35 @@ export function NavBar() {
         className="fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 hidden md:block"
       >
         <nav
-          className={`rounded-full border border-coffee-200/60 dark:border-coffee-700/60 px-6 py-3 transition-all duration-300 ${
-            isScrolled
-              ? "bg-white/80 dark:bg-coffee-950/80 backdrop-blur-xl shadow-lg shadow-coffee-900/5 dark:shadow-black/20"
-              : "bg-white/60 dark:bg-coffee-950/60 backdrop-blur-md"
-          }`}
+          className={`rounded-full border px-2 py-2 transition-all duration-300 ${isScrolled
+              ? "bg-white/90 dark:bg-[#1a1412]/90 backdrop-blur-xl border-zinc-200/80 dark:border-white/10 shadow-lg shadow-zinc-900/5 dark:shadow-black/40"
+              : "bg-white/70 dark:bg-[#1a1412]/70 backdrop-blur-lg border-zinc-200/50 dark:border-white/5"
+            }`}
         >
           <div className="flex items-center justify-center">
             {/* Desktop Navigation */}
             <ul className="flex items-center gap-1">
-              {navItems.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className={`text-sm px-4 py-1.5 rounded-full transition-all duration-200 ${
-                      isActive(item.href)
-                        ? "bg-[#6F4E37] text-white font-medium dark:ring-2 dark:ring-white"
-                        : "text-[#5c4130] dark:text-[#d4b8a5] hover:text-[#412e24] dark:hover:text-white hover:bg-[#f3ebe4] dark:hover:bg-[#3d2e24]"
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
+              {navItems.map((item) => {
+                const active = isActive(item.href);
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className={`relative px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${active
+                          ? "text-white bg-[#6F4E37] shadow-md shadow-[#6F4E37]/20"
+                          : "text-zinc-600 dark:text-zinc-300 hover:text-[#6F4E37] dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/10"
+                        }`}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              })}
               {/* Theme Toggle */}
-              <li>
+              <li className="pl-2 border-l border-zinc-200 dark:border-white/10 ml-1">
                 <button
                   onClick={toggleTheme}
-                  className="ml-2 p-2 rounded-full text-coffee-600 dark:text-coffee-300 hover:text-coffee-900 dark:hover:text-white hover:bg-coffee-100 dark:hover:bg-coffee-800 transition-colors"
+                  className="p-2 rounded-full text-zinc-500 dark:text-zinc-400 hover:text-[#6F4E37] dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/10 transition-colors"
                   aria-label="Toggle theme"
                 >
                   {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
@@ -150,11 +151,10 @@ export function NavBar() {
                   <Link
                     href={item.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`flex items-center text-base px-4 py-3 rounded-xl transition-all ${
-                      isActive(item.href)
+                    className={`flex items-center text-base px-4 py-3 rounded-xl transition-all ${isActive(item.href)
                         ? "bg-[#6F4E37] text-white font-medium dark:ring-2 dark:ring-white"
                         : "text-[#5c4130] dark:text-[#d4b8a5] hover:text-[#412e24] dark:hover:text-white hover:bg-[#faf6f3] dark:hover:bg-[#3d2e24]"
-                    }`}
+                      }`}
                   >
                     {item.label}
                   </Link>

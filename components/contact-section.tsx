@@ -92,6 +92,7 @@ export function ContactSection() {
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/10 dark:focus:ring-white/10 focus:border-slate-300 dark:focus:border-slate-600 transition-all"
                 placeholder="Your name"
+                suppressHydrationWarning
               />
             </div>
             <div>
@@ -106,6 +107,7 @@ export function ContactSection() {
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/10 dark:focus:ring-white/10 focus:border-slate-300 dark:focus:border-slate-600 transition-all"
                 placeholder="you@example.com"
+                suppressHydrationWarning
               />
             </div>
           </div>
@@ -119,11 +121,10 @@ export function ContactSection() {
               {helpOptions.map((option) => (
                 <label
                   key={option.value}
-                  className={`relative cursor-pointer px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
-                    formData.helpType === option.value
+                  className={`relative cursor-pointer px-4 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${formData.helpType === option.value
                       ? "bg-[#6F4E37] text-white dark:ring-2 dark:ring-white"
                       : "bg-zinc-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-zinc-200 dark:hover:bg-slate-700"
-                  }`}
+                    }`}
                 >
                   <input
                     type="radio"
@@ -154,6 +155,7 @@ export function ContactSection() {
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900/10 dark:focus:ring-white/10 focus:border-slate-300 dark:focus:border-slate-600 transition-all resize-none"
               placeholder="Tell me about your project..."
+              suppressHydrationWarning
             />
           </div>
 

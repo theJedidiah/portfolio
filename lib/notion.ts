@@ -54,13 +54,14 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
 
     const data = await response.json();
 
-    // Map the raw data manually
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return data.results.map((post: any) => ({
       id: post.id,
       slug: post.properties.Slug?.rich_text[0]?.plain_text || "",
       title: post.properties.Name?.title[0]?.plain_text || "Untitled",
       description: post.properties.Summary?.rich_text[0]?.plain_text || "",
       publishedAt: post.properties.Date?.date?.start || new Date().toISOString(),
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       tags: post.properties.Tags?.multi_select.map((tag: any) => tag.name) || [],
     }));
 
