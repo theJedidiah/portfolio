@@ -1,4 +1,5 @@
 import { Hero } from "@/components/hero";
+import { WhatIBringSection } from "@/components/what-i-bring-section";
 import { WorkSection } from "@/components/work-section";
 import { BlogPreviewWrapper } from "@/components/blog-preview-wrapper";
 import { ContactSection } from "@/components/contact-section";
@@ -10,6 +11,7 @@ export default async function Home() {
   return (
     <>
       <Hero />
+      <WhatIBringSection />
       <WorkSection />
       <BlogPreviewWrapper posts={posts} />
       <ContactSection />
