@@ -6,13 +6,13 @@ export const projects: Project[] = [
     slug: "qomprice",
     title: "QomPrice",
     description: "Built and launched a Ghana-focused price comparison platform that helps shoppers quickly discover deals across categories.",
-    role: "both",
-    roleLabel: "Founder, Product Manager + Developer",
+    role: "engineering",
+    roleLabel: "Frontend Developer",
     thumbnail: "/projects/automation.jpg",
     techStack: ["React", "Next.js", "JavaScript"],
     tools: ["Figma", "API Integration", "Vercel"],
     featured: true,
-    year: 2026,
+    year: 2025,
     problem: "Online shoppers in Ghana often compare prices manually across multiple stores, which is slow and inconsistent.",
     solution: "Created QomPrice as a searchable product discovery and comparison experience focused on local relevance and clear pricing visibility.",
     outcome: "Shipped a live platform at qomprice.com and established a foundation for scalable product indexing and discovery.",
@@ -30,7 +30,7 @@ export const projects: Project[] = [
     techStack: ["React", "API Integration"],
     tools: ["Figma", "SEVN Ghana LTD (Kowri)", "Fintech"],
     featured: true,
-    year: 2026,
+    year: 2025,
     problem:
       "Businesses needed one clear place to manage collections and disbursements while maintaining visibility across invoices and incoming payments.",
     solution:
@@ -51,7 +51,7 @@ export const projects: Project[] = [
     techStack: ["React", "JavaScript"],
     tools: ["Figma", "SEVN Ghana LTD (Kowri)", "Operations"],
     featured: true,
-    year: 2026,
+    year: 2025,
     problem:
       "Operational teams needed faster, lower-friction handling of approvals and confirmations without sacrificing compliance controls.",
     solution:
@@ -72,7 +72,7 @@ export const projects: Project[] = [
     techStack: ["React", "JavaScript", "Ecommerce"],
     tools: ["Figma", "Shopify", "Content Strategy"],
     featured: true,
-    year: 2026,
+    year: 2022,
     problem:
       "The brand needed an online storefront that preserved cultural storytelling while supporting smooth product discovery and checkout journeys.",
     solution:
