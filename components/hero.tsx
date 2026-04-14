@@ -21,7 +21,7 @@ const letterVariants = {
 
 export function Hero() {
   const { theme } = useTheme();
-  const name = "jedidiah.";
+  const name = "Emmanuel Jedidiah";
 
   return (
     <section className="relative min-h-screen bg-coffee-50 dark:bg-coffee-950 overflow-hidden">
@@ -119,7 +119,7 @@ export function Hero() {
             >
               <Image
                 src="/hero-image.jpg"
-                alt="jedidiah."
+                alt="Emmanuel Jedidiah"
                 fill
                 className="object-cover object-center"
                 priority
